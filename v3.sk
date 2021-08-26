@@ -1,0 +1,74 @@
+command "/create <text>":
+    trigger:
+        if arg 1 is "private":
+            send "&cプライベートサーバーを作成します。" to player
+            send "&c少々お待ち下さい。" to player
+            send "&7Server name: p_%player%" to player
+            send "&7Server owner: %player%" to player
+            send "&7Mode: private" to player
+            execute console command "mv create p_%player% normal"
+            send "&4[&c{server}&4] &rSuccess!" to player
+            execute console command "tpserver %player% p_%player%"
+        if arg 1 is "release":
+            send "&c公開サーバーを作成します。" to player
+            send "&c少々お待ち下さい。(誰でも入れます。荒らしなどに注意してください。)" to player
+            send "&7Server name: p_%player%" to player
+            send "&7Server owner: %player%" to player
+            send "&7Mode: release" to player
+            execute console command "mv create o_%player% normal"
+            send "&4[&c{server}&4] &rSuccess!" to player
+            execute console command "tpserver %player% o_%player%"
+command "/tpserver <player> <text>":
+    permission: world.over.server
+    permission massage: 権限を所持していません
+    trigger:
+        execute console command "mvtp %arg 1% %arg 2%"
+        send "Success!" to player
+        send "&7[Server name: %arg 2% Teleport player: %arg 1%]" to player
+        send "&4[&c{server}&4] &r%arg 1% さんは %arg 2% サーバーへ転送されました。" to arg 1
+command "/server <text>":
+    trigger:
+        execute console command "mvtp %player% o_%arg 1%"
+        send "&4[&c{server}&4] &r%arg 1% サーバーへ転送されました。" to player
+command "/servertype <text>":
+    trigger:
+        if arg 1 is "private":
+            execute console command "mv clone o_%player% p_%player%"
+            execute console command "mv delete o_player"
+            send "&4[&c{server}&4] &r認証のため &a/true &rと入力してください" to player
+            send "&7モード切替は自己責任で、ベータ版です。データが破損しても責任は問いません。" to player
+        if arg 1 is "release":
+            execute console command "mv clone p_%player% o_%player%"
+            execute console command "mv delete p_player"
+            send "&4[&c{server}&4] &r認証のため &a/true &rと入力してください" to player
+            send "&7モード切替は自己責任で、ベータ版です。データが破損しても責任は問いません。" to player
+command "/true":
+    trigger:
+        execute console command "mvconfirm"
+        send "&4[&c{server}&4] &aSuccess! 成功しました。" to player
+command "/removeserver <text>":
+    trigger:
+        if arg 1 is "private":
+            execute console command "mv delete p_%player%"
+            send "&4[&c{server}&4] &r認証のため &a/true &rと入力してください" to player
+        if arg 1 is "release":
+            execute console command "mv delete p_%player%"
+            send "&4[&c{server}&4] &r認証のため &a/true &rと入力してください" to player
+command "/helpsv3":
+    trigger:
+        send "&c1 &6world generate server system &7({server})" to player
+        send "このシステムはサーバーのプレイヤー専用1つのサーバー(オーバーのみ)を1つのサーバーのみで複数作成できるシステムです。" to player
+        send "" to player
+        send "- [&c使い方&r] -" to player
+        send "&a/create private &9> &rプライベートサーバーを構築します。他の人は入れません。" to player
+        send "&a/create release &9> &r公開サーバーを構築します。" to player
+        send "&a/server <サーバー主名> &9> &r指定したプレイヤーの公開サーバーに接続します。" to player
+        send "&a/servertype <private|release> &9> &rサーバーの公開、非公開を変更します。" to player
+        send "&a/removeserver <(公開サーバーかプライベートサーバーを削除するか)private|release> &9> &rサーバーを削除します。" to player
+command "/ownerhelpsv3":
+    permission: world.over.server
+    permission massage: 子供は見ちゃいけません
+    trigger:
+        send "管理に必要な権限 world.over.server" to player
+        send "ワールドへ強制送還 /tpserver <playername> <world name>" to player
+        send "ふつーのヘルプ /helpsv3" to player
