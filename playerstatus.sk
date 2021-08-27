@@ -1,0 +1,8 @@
+command "/playerstatus":
+    aliases: /ps
+    trigger:
+        send "&8-&7= &r{ &cPlayer Stauts &r} &7=&8-" to player
+        send "&aMCID&r: &c%player%" to player
+        send "&aUUID&r: &c%UUID of player%" to player
+        send "&aLocation&r: &c%location of player%" to player
+        send "&aNameMC&r: &chttps://mine.ly/%player%" to player
