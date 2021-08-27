@@ -1,0 +1,24 @@
+on Drop:
+    if {chestoffon} is "true":
+        send "&cNo drop here." to player
+        if {trueban} is "true":
+            execute console command "ban %player% アイテムを落としやがったな...!"
+on rightclick:
+    if event-block is Chest:
+        if {chestoffon} is "true":
+            send "&cNo open here." to player
+            if {trueban} is "true":
+                execute console command "ban %player% チェスト開けたやつは死刑www"
+            cancel event
+command "/itemplugin <text> <text>":
+    permission: op
+    permission massage: Out! 権限を所持していません
+    trigger:
+        if arg 1 is "on":
+            set {trueban} to true
+        else:
+            set {trueban} to false
+        if arg 2 is "on":
+            set {chestoffon} to true
+        else:
+            set {chestoffon} to false
