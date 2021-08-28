@@ -1,0 +1,6 @@
+on player jump:
+    send "&4[&cNo jump&4] &rNo jump!" to player
+    cancel event
+on join:
+    send "&c&nジャンプ&rができない世界へ&eよ う こ そ 。" to player
+    send "&a企画&r: &n鯖主 &7| &9企画.com" to player
