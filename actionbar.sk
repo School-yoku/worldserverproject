@@ -1,0 +1,8 @@
+loop all players:
+    if {action.bar} is "true":
+        set action bar of loop-player to "&c%player% &r| &a企画&r.com"
+command "/act <text>":
+    permission: op
+    permission massage: Hiiiiiiiiiiiiiiiiiiiiiii
+    trigger:
+        set {action.bar} to %arg 1%
