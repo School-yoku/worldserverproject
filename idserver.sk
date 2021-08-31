@@ -1,0 +1,19 @@
+command "/servercreate <text> <text>":
+    trigger:
+        if arg 2 is "flat":
+            send "&aOkay. Server creating..." to player
+            execute console command "mv create %arg 1% normal -t flat"
+            send "&aSuccess!" to player
+        if arg 2 is "normal":
+            send "&aOkay. Server creating..." to player
+            execute console command "mv create %arg 1%"
+            send "&aSuccess!" to player
+        else:
+            send "Out: &c/servercreate <password> <normal|flat>" to player
+command "/connect <text>":
+    trigger:
+        send "&aConnecting.. &c%arg 1%" to player
+        execute console command "mvtp %player% %arg 1%"
+command "/hub":
+    trigger:
+        execute console command "mvtp %player% hub"
